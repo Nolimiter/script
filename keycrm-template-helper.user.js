@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         KeyCRM Template Helper
 // @namespace    http://tampermonkey.net/
-// @version      21.9
+// @version      22.0
 // @description  Додає панель з кнопками для вставки привітань та керування шаблонами. Підтримує транслітерацію імен з латиниці на кирилицю. Оптимізована версія з покращеною структурою коду.
 // @author       KeyCRM Helper Team
 // @match        *://*.keycrm.app/*
@@ -21,7 +21,7 @@
  * - Drag-and-drop template reordering
  * - Custom transliteration dictionary management
  *
- * @version 21.9
+ * @version 22.0
  * @license MIT
  */
 
@@ -769,6 +769,8 @@
      * @namespace UIModule
      */
     const UIModule = {
+        draggedItem: null, // Спільна змінна для drag and drop
+
         /**
          * Inserts text into the active textarea
          * @param {string} text - The text to insert
@@ -1113,10 +1115,8 @@
          * @param {HTMLElement} item - The list item element
          */
         attachDragHandlers(item) {
-            let draggedItem = null;
-
             item.addEventListener('dragstart', function(e) {
-                draggedItem = this;
+                UIModule.draggedItem = this;
                 e.dataTransfer.effectAllowed = 'move';
                 this.style.opacity = '0.6';
             });
@@ -1140,12 +1140,12 @@
 
                 try {
                     // Перевіряємо чи draggedItem існує (може бути null якщо drop за межами області)
-                    if (!draggedItem) {
+                    if (!UIModule.draggedItem) {
                         return false;
                     }
 
-                    if (draggedItem != this) {
-                        const draggedIndex = parseInt(draggedItem.getAttribute('data-index'));
+                    if (UIModule.draggedItem != this) {
+                        const draggedIndex = parseInt(UIModule.draggedItem.getAttribute('data-index'));
                         const targetIndex = parseInt(this.getAttribute('data-index'));
 
                         if (!isNaN(draggedIndex) && !isNaN(targetIndex)) {
@@ -1171,6 +1171,7 @@
 
             item.addEventListener('dragend', function() {
                 this.style.opacity = '1';
+                UIModule.draggedItem = null; // Очищуємо після завершення
                 document.querySelectorAll('.template-item-list').forEach(el => {
                     el.classList.remove('drag-over');
                 });
