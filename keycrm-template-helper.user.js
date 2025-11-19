@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         KeyCRM Template Helper
 // @namespace    http://tampermonkey.net/
-// @version      21.7
+// @version      21.8
 // @description  Додає панель з кнопками для вставки привітань та керування шаблонами. Підтримує транслітерацію імен з латиниці на кирилицю. Оптимізована версія з покращеною структурою коду.
 // @author       KeyCRM Helper Team
 // @match        *://*.keycrm.app/*
@@ -21,7 +21,7 @@
  * - Drag-and-drop template reordering
  * - Custom transliteration dictionary management
  *
- * @version 21.7
+ * @version 21.8
  * @license MIT
  */
 
@@ -1139,6 +1139,12 @@
                 if (e.stopPropagation) e.stopPropagation();
 
                 try {
+                    // Перевіряємо чи draggedItem існує
+                    if (!draggedItem) {
+                        console.warn('KeyCRM Template Helper: draggedItem is null');
+                        return false;
+                    }
+
                     if (draggedItem != this) {
                         const draggedIndex = parseInt(draggedItem.getAttribute('data-index'));
                         const targetIndex = parseInt(this.getAttribute('data-index'));
@@ -1419,6 +1425,9 @@
      * @namespace ButtonModule
      */
     const ButtonModule = {
+        attemptsCount: 0,
+        foundOnce: false,
+
         /**
          * Creates the greeting button
          * @param {HTMLElement} container - The container element
@@ -1499,8 +1508,18 @@
             const iconContainers = document.querySelectorAll('.vac-icon-textarea');
 
             if (iconContainers.length === 0) {
-                console.log('KeyCRM Template Helper: .vac-icon-textarea не знайдено');
+                this.attemptsCount++;
+                // Логуємо тільки кожні 20 спроб, щоб не спамити консоль
+                if (!this.foundOnce && this.attemptsCount % 20 === 0) {
+                    console.log('KeyCRM Template Helper: .vac-icon-textarea не знайдено (спроб: ' + this.attemptsCount + ')');
+                }
                 return;
+            }
+
+            // Знайшли контейнери
+            if (!this.foundOnce) {
+                this.foundOnce = true;
+                console.log('KeyCRM Template Helper: .vac-icon-textarea знайдено!');
             }
 
             iconContainers.forEach(container => {
@@ -1547,13 +1566,18 @@
      */
     const ObserverModule = {
         observer: null,
+        debounceTimer: null,
 
         /**
          * Starts observing DOM changes
          */
         start() {
             this.observer = new MutationObserver(() => {
-                ButtonModule.ensureButtons();
+                // Debounce для уникнення занадто частих викликів
+                clearTimeout(this.debounceTimer);
+                this.debounceTimer = setTimeout(() => {
+                    ButtonModule.ensureButtons();
+                }, 500);
             });
 
             this.observer.observe(document.body, {
