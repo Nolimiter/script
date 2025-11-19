@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         KeyCRM Template Helper
 // @namespace    http://tampermonkey.net/
-// @version      21.3
+// @version      21.4
 // @description  Додає панель з кнопками для вставки привітань та керування шаблонами. Підтримує транслітерацію імен з латиниці на кирилицю. Оптимізована версія з покращеною структурою коду.
 // @author       KeyCRM Helper Team
 // @match        *://*.keycrm.app/*
@@ -21,14 +21,14 @@
  * - Drag-and-drop template reordering
  * - Custom transliteration dictionary management
  *
- * @version 21.3
+ * @version 21.4
  * @license MIT
  */
 
 (function() {
     'use strict';
 
-    console.log(`KeyCRM Template Helper v21.3: Скрипт запускається...`);
+    console.log(`KeyCRM Template Helper v21.4: Скрипт запускається...`);
 
     // ============================================================================
     // SETTINGS MODULE
@@ -79,13 +79,24 @@
             GM_addStyle(`
                 /* Custom Icon Styles */
                 .key-icon--greeting {
-                    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9c-1.5 1.5-1.5 3-1.5 3s0 1.5 1.5 3c1.5 1.5 3.5 1.5 3.5 1.5s2 0 3.5-1.5c1.5-1.5 1.5-3 1.5-3V7.5c0-1.5 0-3 1.5-4.5 1.5-1.5 3.5-1.5 3.5-1.5s2 0 3.5 1.5M18 7.5c1.5 0 3 .5 3 2"/><path d="M7 8.5c0-1 1-2 2-2s2 1 2 2v3c0 1-1 2-2 2s-2-1-2-2z"/></svg>');
-                    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9c-1.5 1.5-1.5 3-1.5 3s0 1.5 1.5 3c1.5 1.5 3.5 1.5 3.5 1.5s2 0 3.5-1.5c1.5-1.5 1.5-3 1.5-3V7.5c0-1.5 0-3 1.5-4.5 1.5-1.5 3.5-1.5 3.5-1.5s2 0 3.5 1.5M18 7.5c1.5 0 3 .5 3 2"/><path d="M7 8.5c0-1 1-2 2-2s2 1 2 2v3c0 1-1 2-2 2s-2-1-2-2z"/></svg>');
+                    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 22a1 1 0 0 1-.707-1.707l4.586-4.586a1 1 0 0 1 1.414 1.414l-4.586 4.586A1 1 0 0 1 7 22zm10-2a1 1 0 0 1-.707-.293l-2-2a1 1 0 0 1 1.414-1.414l2 2A1 1 0 0 1 17 20zM6.5 16a1.5 1.5 0 0 1-1.06-2.56l2-2a1.5 1.5 0 0 1 2.12 2.12l-2 2A1.5 1.5 0 0 1 6.5 16zm5-3a1.5 1.5 0 0 1-1.06-.44l-2-2a1.5 1.5 0 0 1 2.12-2.12l2 2a1.5 1.5 0 0 1-1.06 2.56zm-4-4a2 2 0 0 1-1.41-.59l-2-2a2 2 0 0 1 2.82-2.82l2 2A2 2 0 0 1 7.5 9zm12-3a2 2 0 0 1-1.41-.59l-1-1a2 2 0 0 1 2.82-2.82l1 1A2 2 0 0 1 19.5 6z"/></svg>');
+                    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 22a1 1 0 0 1-.707-1.707l4.586-4.586a1 1 0 0 1 1.414 1.414l-4.586 4.586A1 1 0 0 1 7 22zm10-2a1 1 0 0 1-.707-.293l-2-2a1 1 0 0 1 1.414-1.414l2 2A1 1 0 0 1 17 20zM6.5 16a1.5 1.5 0 0 1-1.06-2.56l2-2a1.5 1.5 0 0 1 2.12 2.12l-2 2A1.5 1.5 0 0 1 6.5 16zm5-3a1.5 1.5 0 0 1-1.06-.44l-2-2a1.5 1.5 0 0 1 2.12-2.12l2 2a1.5 1.5 0 0 1-1.06 2.56zm-4-4a2 2 0 0 1-1.41-.59l-2-2a2 2 0 0 1 2.82-2.82l2 2A2 2 0 0 1 7.5 9zm12-3a2 2 0 0 1-1.41-.59l-1-1a2 2 0 0 1 2.82-2.82l1 1A2 2 0 0 1 19.5 6z"/></svg>');
                 }
 
                 .key-icon--template {
                     -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>');
                     mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>');
+                }
+
+                /* Правильні розміри для іконок */
+                .key-icon--greeting,
+                .key-icon--template {
+                    display: inline-block;
+                    position: relative;
+                    width: 18px;
+                    height: 18px;
+                    top: 4px;
+                    background: #575962;
                 }
 
                 /* Hover effects for custom icons */
