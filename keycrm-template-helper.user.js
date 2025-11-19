@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         KeyCRM Template Helper
 // @namespace    http://tampermonkey.net/
-// @version      21.0
+// @version      21.1
 // @description  Додає панель з кнопками для вставки привітань та керування шаблонами. Підтримує транслітерацію імен з латиниці на кирилицю. Оптимізована версія з покращеною структурою коду.
 // @author       KeyCRM Helper Team
 // @match        *://*.keycrm.app/*
@@ -21,14 +21,14 @@
  * - Drag-and-drop template reordering
  * - Custom transliteration dictionary management
  *
- * @version 21.0
+ * @version 21.1
  * @license MIT
  */
 
 (function() {
     'use strict';
 
-    console.log(`KeyCRM Template Helper v21.0: Скрипт запускається...`);
+    console.log(`KeyCRM Template Helper v21.1: Скрипт запускається...`);
 
     // ============================================================================
     // SETTINGS MODULE
@@ -77,20 +77,9 @@
          */
         injectStyles() {
             GM_addStyle(`
-                /* Button Styles */
-                .textarea-icon {
-                    cursor: pointer;
-                    transition: all 0.2s ease;
-                    border-radius: 3px !important;
-                    padding: 2px 7px !important;
-                }
-
-                .textarea-icon:hover {
-                    background-color: rgba(0, 166, 242, 0.2) !important;
-                }
-
-                #crm-greeting-button-custom-icon.inserted,
-                #crm-templates-button-custom-icon.inserted {
+                /* Button Animation Styles */
+                #crm-greeting-button-custom-icon.inserted i,
+                #crm-templates-button-custom-icon.inserted i {
                     animation: insertedAnimation 0.5s ease;
                 }
 
@@ -1413,48 +1402,41 @@
             button.className = 'textarea-icon';
             button.setAttribute('data-v-31f5263f', '');
             button.title = 'Вставити привітання (утримуйте для налаштувань)';
-            button.style.cssText = `
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: auto;
-                height: auto;
-                padding: 2px 7px;
-                border-radius: 3px;
-                background-color: #3e3e3f;
-                cursor: pointer;
+
+            // Створюємо іконку всередині, як в KeyCRM
+            const icon = document.createElement('i');
+            icon.className = 'key-icon m-0';
+            icon.style.cssText = `
+                font-style: normal;
                 font-size: 18px;
                 font-weight: bold;
                 color: #4daafc;
-                margin-left: 8px;
-                transition: all 0.2s ease;
-                user-select: none;
-                border: none;
             `;
-            button.textContent = '+';
+            icon.textContent = '+';
+            button.appendChild(icon);
 
             button.addEventListener('click', () => GreetingModule.processAndInsert());
 
             button.addEventListener('mousedown', () => {
                 pressTimer = setTimeout(() => {
                     UIModule.showAddTranslit();
-                    button.style.backgroundColor = 'rgba(0, 102, 204, 0.5)';
+                    icon.style.color = '#0066cc';
                 }, 800);
             });
 
             button.addEventListener('mouseenter', () => {
-                button.style.backgroundColor = 'rgba(0, 166, 242, 0.2)';
+                icon.style.color = '#00a6f2';
             });
 
             button.addEventListener('mouseleave', () => {
-                button.style.backgroundColor = '#3e3e3f';
+                icon.style.color = '#4daafc';
                 if (pressTimer) clearTimeout(pressTimer);
             });
 
             button.addEventListener('mouseup', () => {
                 clearTimeout(pressTimer);
                 if (!button.matches(':hover')) {
-                    button.style.backgroundColor = '#3e3e3f';
+                    icon.style.color = '#4daafc';
                 }
             });
 
@@ -1473,34 +1455,27 @@
             button.className = 'textarea-icon';
             button.setAttribute('data-v-31f5263f', '');
             button.title = 'Шаблони (Ctrl+Alt+T)';
-            button.style.cssText = `
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: auto;
-                height: auto;
-                padding: 2px 7px;
-                border-radius: 3px;
-                background-color: #3e3e3f;
-                cursor: pointer;
+
+            // Створюємо іконку всередині, як в KeyCRM
+            const icon = document.createElement('i');
+            icon.className = 'key-icon m-0';
+            icon.style.cssText = `
+                font-style: normal;
                 font-size: 18px;
                 font-weight: bold;
                 color: #51cf66;
-                margin-left: 8px;
-                transition: all 0.2s ease;
-                user-select: none;
-                border: none;
             `;
-            button.textContent = '≡';
+            icon.textContent = '≡';
+            button.appendChild(icon);
 
             button.addEventListener('click', () => UIModule.showTemplatesPanel());
 
             button.addEventListener('mouseenter', () => {
-                button.style.backgroundColor = 'rgba(0, 166, 242, 0.2)';
+                icon.style.color = '#40c057';
             });
 
             button.addEventListener('mouseleave', () => {
-                button.style.backgroundColor = '#3e3e3f';
+                icon.style.color = '#51cf66';
             });
 
             this.insertButton(container, button);
@@ -1524,15 +1499,20 @@
          * Ensures buttons exist in the page
          */
         ensureButtons() {
-            const textAreas = document.querySelectorAll(SettingsModule.textAreaSelector);
+            // Шукаємо контейнер з іконками напряму
+            const iconContainers = document.querySelectorAll('.vac-icon-textarea');
 
-            textAreas.forEach(textArea => {
-                const container = textArea.closest('.vac-icon-textarea') ||
-                                textArea.closest('.textarea-icons') ||
-                                textArea.parentElement;
+            if (iconContainers.length === 0) {
+                console.log('KeyCRM Template Helper: .vac-icon-textarea не знайдено');
+                return;
+            }
 
-                if (container) {
+            iconContainers.forEach(container => {
+                // Перевіряємо, чи вже є наші кнопки
+                if (!container.querySelector('#crm-greeting-button-custom-icon')) {
                     this.createGreetingButton(container);
+                }
+                if (!container.querySelector('#crm-templates-button-custom-icon')) {
                     this.createTemplatesButton(container);
                 }
             });
