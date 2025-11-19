@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         KeyCRM Template Helper
 // @namespace    http://tampermonkey.net/
-// @version      21.2
+// @version      21.3
 // @description  Додає панель з кнопками для вставки привітань та керування шаблонами. Підтримує транслітерацію імен з латиниці на кирилицю. Оптимізована версія з покращеною структурою коду.
 // @author       KeyCRM Helper Team
 // @match        *://*.keycrm.app/*
@@ -21,14 +21,14 @@
  * - Drag-and-drop template reordering
  * - Custom transliteration dictionary management
  *
- * @version 21.2
+ * @version 21.3
  * @license MIT
  */
 
 (function() {
     'use strict';
 
-    console.log(`KeyCRM Template Helper v21.2: Скрипт запускається...`);
+    console.log(`KeyCRM Template Helper v21.3: Скрипт запускається...`);
 
     // ============================================================================
     // SETTINGS MODULE
@@ -79,13 +79,13 @@
             GM_addStyle(`
                 /* Custom Icon Styles */
                 .key-icon--greeting {
-                    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>');
-                    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>');
+                    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9c-1.5 1.5-1.5 3-1.5 3s0 1.5 1.5 3c1.5 1.5 3.5 1.5 3.5 1.5s2 0 3.5-1.5c1.5-1.5 1.5-3 1.5-3V7.5c0-1.5 0-3 1.5-4.5 1.5-1.5 3.5-1.5 3.5-1.5s2 0 3.5 1.5M18 7.5c1.5 0 3 .5 3 2"/><path d="M7 8.5c0-1 1-2 2-2s2 1 2 2v3c0 1-1 2-2 2s-2-1-2-2z"/></svg>');
+                    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9c-1.5 1.5-1.5 3-1.5 3s0 1.5 1.5 3c1.5 1.5 3.5 1.5 3.5 1.5s2 0 3.5-1.5c1.5-1.5 1.5-3 1.5-3V7.5c0-1.5 0-3 1.5-4.5 1.5-1.5 3.5-1.5 3.5-1.5s2 0 3.5 1.5M18 7.5c1.5 0 3 .5 3 2"/><path d="M7 8.5c0-1 1-2 2-2s2 1 2 2v3c0 1-1 2-2 2s-2-1-2-2z"/></svg>');
                 }
 
                 .key-icon--template {
-                    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>');
-                    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>');
+                    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>');
+                    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>');
                 }
 
                 /* Hover effects for custom icons */
