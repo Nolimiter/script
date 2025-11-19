@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         KeyCRM Template Helper
 // @namespace    http://tampermonkey.net/
-// @version      21.8
+// @version      21.9
 // @description  Додає панель з кнопками для вставки привітань та керування шаблонами. Підтримує транслітерацію імен з латиниці на кирилицю. Оптимізована версія з покращеною структурою коду.
 // @author       KeyCRM Helper Team
 // @match        *://*.keycrm.app/*
@@ -21,7 +21,7 @@
  * - Drag-and-drop template reordering
  * - Custom transliteration dictionary management
  *
- * @version 21.8
+ * @version 21.9
  * @license MIT
  */
 
@@ -1139,9 +1139,8 @@
                 if (e.stopPropagation) e.stopPropagation();
 
                 try {
-                    // Перевіряємо чи draggedItem існує
+                    // Перевіряємо чи draggedItem існує (може бути null якщо drop за межами області)
                     if (!draggedItem) {
-                        console.warn('KeyCRM Template Helper: draggedItem is null');
                         return false;
                     }
 
