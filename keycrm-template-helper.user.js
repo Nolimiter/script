@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         KeyCRM Template Helper
 // @namespace    http://tampermonkey.net/
-// @version      21.1
+// @version      21.2
 // @description  Додає панель з кнопками для вставки привітань та керування шаблонами. Підтримує транслітерацію імен з латиниці на кирилицю. Оптимізована версія з покращеною структурою коду.
 // @author       KeyCRM Helper Team
 // @match        *://*.keycrm.app/*
@@ -21,14 +21,14 @@
  * - Drag-and-drop template reordering
  * - Custom transliteration dictionary management
  *
- * @version 21.1
+ * @version 21.2
  * @license MIT
  */
 
 (function() {
     'use strict';
 
-    console.log(`KeyCRM Template Helper v21.1: Скрипт запускається...`);
+    console.log(`KeyCRM Template Helper v21.2: Скрипт запускається...`);
 
     // ============================================================================
     // SETTINGS MODULE
@@ -77,9 +77,29 @@
          */
         injectStyles() {
             GM_addStyle(`
+                /* Custom Icon Styles */
+                .key-icon--greeting {
+                    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>');
+                    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>');
+                }
+
+                .key-icon--template {
+                    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>');
+                    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>');
+                }
+
+                /* Hover effects for custom icons */
+                .textarea-icon:hover .key-icon--greeting {
+                    background: #4daafc;
+                }
+
+                .textarea-icon:hover .key-icon--template {
+                    background: #51cf66;
+                }
+
                 /* Button Animation Styles */
-                #crm-greeting-button-custom-icon.inserted i,
-                #crm-templates-button-custom-icon.inserted i {
+                #crm-greeting-button-custom-icon.inserted .key-icon,
+                #crm-templates-button-custom-icon.inserted .key-icon {
                     animation: insertedAnimation 0.5s ease;
                 }
 
@@ -1403,16 +1423,9 @@
             button.setAttribute('data-v-31f5263f', '');
             button.title = 'Вставити привітання (утримуйте для налаштувань)';
 
-            // Створюємо іконку всередині, як в KeyCRM
+            // Створюємо іконку всередині, як нативні іконки KeyCRM
             const icon = document.createElement('i');
-            icon.className = 'key-icon m-0';
-            icon.style.cssText = `
-                font-style: normal;
-                font-size: 18px;
-                font-weight: bold;
-                color: #4daafc;
-            `;
-            icon.textContent = '+';
+            icon.className = 'key-icon key-icon--greeting m-0';
             button.appendChild(icon);
 
             button.addEventListener('click', () => GreetingModule.processAndInsert());
@@ -1420,24 +1433,11 @@
             button.addEventListener('mousedown', () => {
                 pressTimer = setTimeout(() => {
                     UIModule.showAddTranslit();
-                    icon.style.color = '#0066cc';
                 }, 800);
-            });
-
-            button.addEventListener('mouseenter', () => {
-                icon.style.color = '#00a6f2';
-            });
-
-            button.addEventListener('mouseleave', () => {
-                icon.style.color = '#4daafc';
-                if (pressTimer) clearTimeout(pressTimer);
             });
 
             button.addEventListener('mouseup', () => {
                 clearTimeout(pressTimer);
-                if (!button.matches(':hover')) {
-                    icon.style.color = '#4daafc';
-                }
             });
 
             this.insertButton(container, button);
@@ -1456,27 +1456,12 @@
             button.setAttribute('data-v-31f5263f', '');
             button.title = 'Шаблони (Ctrl+Alt+T)';
 
-            // Створюємо іконку всередині, як в KeyCRM
+            // Створюємо іконку всередині, як нативні іконки KeyCRM
             const icon = document.createElement('i');
-            icon.className = 'key-icon m-0';
-            icon.style.cssText = `
-                font-style: normal;
-                font-size: 18px;
-                font-weight: bold;
-                color: #51cf66;
-            `;
-            icon.textContent = '≡';
+            icon.className = 'key-icon key-icon--template m-0';
             button.appendChild(icon);
 
             button.addEventListener('click', () => UIModule.showTemplatesPanel());
-
-            button.addEventListener('mouseenter', () => {
-                icon.style.color = '#40c057';
-            });
-
-            button.addEventListener('mouseleave', () => {
-                icon.style.color = '#51cf66';
-            });
 
             this.insertButton(container, button);
         },
