@@ -57,18 +57,18 @@
         /* Декоративні серця в кутах */
         .heart-corner {
             position: absolute;
-            font-size: 12pt; /* Зменшено розмір серця */
+            font-size: 8pt; /* Дуже маленький розмір */
             color: #ff69b4;
-            opacity: 0.15;
-            z-index: 1; /* Ensure hearts are below content */
-            padding: 4mm; /* Максимальний відступ навколо серця */
-            pointer-events: none; /* Заборонити взаємодію з мишкою */
+            opacity: 0.08; /* Дуже прозорі */
+            z-index: 0; /* За текстом */
+            pointer-events: none; /* Заборонити взаємодію */
+            user-select: none; /* Заборонити виділення */
         }
 
-        .heart-tl { top: 14mm; left: 14mm; }
-        .heart-tr { top: 14mm; right: 14mm; transform: scaleX(-1); }
-        .heart-bl { bottom: 14mm; left: 14mm; transform: scaleY(-1); }
-        .heart-br { bottom: 14mm; right: 14mm; transform: scale(-1); }
+        .heart-tl { top: 8mm; left: 8mm; }
+        .heart-tr { top: 8mm; right: 8mm; transform: scaleX(-1); }
+        .heart-bl { bottom: 8mm; left: 8mm; transform: scaleY(-1); }
+        .heart-br { bottom: 8mm; right: 8mm; transform: scale(-1); }
 
         /* Додаткові відступи для запобігання накладання тексту на серця */
         .inner-border {
@@ -265,20 +265,19 @@
 
         /* Елементи списку */
         .list-item {
-            margin-left: 6mm;
+            margin-left: 4mm;
             margin-bottom: 0.6mm;
-            position: relative;
-            padding-left: 3mm;
             font-size: 10pt;
             line-height: 1.25;
         }
 
-        .list-item::before {
-            content: '❤';
-            position: absolute;
-            left: 0;
+        .heart-bullet {
             color: #ff69b4;
-            font-size: 10pt;
+            font-size: 8pt;
+            opacity: 0.7;
+            margin-right: 2mm;
+            display: inline-block;
+            user-select: none;
         }
 
         /* Блок підписів */
@@ -359,15 +358,10 @@
             }
 
             .heart-corner {
-                font-size: 4pt; /* Even smaller hearts for print */
-                opacity: 0.01;
-                padding: 5mm; /* Maximum padding for print */
+                font-size: 3pt; /* Мінімальний розмір для друку */
+                opacity: 0.02; /* Майже невидимі */
+                display: none; /* Приховати при друку */
             }
-
-            .heart-tl { top: 19mm; left: 19mm; }
-            .heart-tr { top: 19mm; right: 19mm; transform: scaleX(-1); }
-            .heart-bl { bottom: 19mm; left: 19mm; transform: scaleY(-1); }
-            .heart-br { bottom: 19mm; right: 19mm; transform: scale(-1); }
 
             .main-title {
                 font-size: 10pt; /* Further reduced size for better A4 printing */
@@ -454,12 +448,13 @@
             .list-item {
                 margin-bottom: 0.1mm; /* Further reduced margin for A4 fit */
                 font-size: 7pt; /* Further reduced size for better A4 printing */
-                margin-left: 2.5mm; /* Further reduced margin for A4 fit */
-                padding-left: 1mm; /* Further reduced padding for A4 fit */
+                margin-left: 2mm; /* Further reduced margin for A4 fit */
             }
 
-            .list-item::before {
-                font-size: 7pt; /* Further reduced hearts */
+            .heart-bullet {
+                font-size: 6pt; /* Менші серця для друку */
+                opacity: 0.5; /* Прозоріші для друку */
+                margin-right: 1mm;
             }
 
             .signatures-section {
@@ -521,9 +516,7 @@
 
                 <div class="subtitle">( «Пропозиція, від якої неможливо відмовитись» )</div>
 
-
-
-                <div class="divider">❤ ❤ ❤</div>
+                <div class="divider">❤</div>
 
                 <!-- Сторони угоди -->
                 <div class="parties-block">
@@ -581,21 +574,21 @@
                     2.1. Сторона 1 (Хлопець) зобов'язується:
                 </div>
 
-                <div class="list-item">Офіційно погодитись на статус Хлопця Сторони 1</div>
-                <div class="list-item">Дивитися на Сторону 2 закоханими очима не менше 5 разів на день</div>
-                <div class="list-item">Вбивати павуків та відкривати тугі банки з огірками</div>
-                <div class="list-item">Терпляче чекати, поки Сторона 2 збереться на вихід (навіть якщо це займає "ще 5 хвилиночок")</div>
-                <div class="list-item">Слухати всі пісні які любить співати Сторона 2</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Офіційно погодитись на статус Хлопця Сторони 1</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Дивитися на Сторону 2 закоханими очима не менше 5 разів на день</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Вбивати павуків та відкривати тугі банки з огірками</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Терпляче чекати, поки Сторона 2 збереться на вихід (навіть якщо це займає "ще 5 хвилиночок")</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Слухати всі пісні які любить співати Сторона 2</div>
 
                 <div class="sub-paragraph">
                     2.2. Сторона 2 (Дівчина) зобов'язується:
                 </div>
 
-                <div class="list-item">Офіційно погодитись на статус Дівчини Сторони 1</div>
-                <div class="list-item">Дивитися на Сторону 1 закоханими очима не менше 5 разів на день</div>
-                <div class="list-item">Допомагати у побуті Стороні 1</div>
-                <div class="list-item">Вибирати фільм для перегляду не довше, ніж триває сам фільм</div>
-                <div class="list-item">Отримувати компліменти без заперечень типу "ой, ні, я сьогодні не виспалась"</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Офіційно погодитись на статус Дівчини Сторони 1</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Дивитися на Сторону 1 закоханими очима не менше 5 разів на день</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Допомагати у побуті Стороні 1</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Вибирати фільм для перегляду не довше, ніж триває сам фільм</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Отримувати компліменти без заперечень типу "ой, ні, я сьогодні не виспалась"</div>
                 &nbsp;<br>
 
                 <!-- Розділ 3 -->
@@ -650,10 +643,10 @@
                     <span class="paragraph-number">6.1.</span> Сторони звільняються від відповідальності за поганий настрій, якщо вони:
                 </div>
 
-                <div class="list-item">Голодні</div>
-                <div class="list-item">Не виспались</div>
-                <div class="list-item">Програли у відеогрі (стосується Сторони 1)</div>
-                <div class="list-item">Зламали ніготь (стосується Сторони 2)</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Голодні</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Не виспались</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Програли у відеогрі (стосується Сторони 1)</div>
+                <div class="list-item"><span class="heart-bullet">❤</span>Зламали ніготь (стосується Сторони 2)</div>
                 &nbsp;<br>
 
                 <!-- Підписи -->
