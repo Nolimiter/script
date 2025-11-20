@@ -80,13 +80,16 @@
         .main-title {
             text-align: center;
             font-family: 'Playfair Display', serif;
-            font-size: 13pt;
+            font-size: 14pt;
             font-weight: 900;
             color: #ff1493;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5mm;
+            letter-spacing: 1.5px;
+            margin-bottom: 2mm;
+            margin-top: 3mm;
             position: relative;
+            padding: 3mm 0;
+            line-height: 1.4;
         }
 
         /* Підзаголовок */
@@ -96,7 +99,8 @@
             font-size: 11pt;
             font-style: italic;
             color: #ff69b4;
-            margin: 1.5mm 0;
+            margin: 2mm 0 4mm 0;
+            padding-bottom: 2mm;
         }
 
         /* Місце та дата */
@@ -111,9 +115,10 @@
         /* Розділювач з сердечками */
         .divider {
             text-align: center;
-            margin: 2mm 0;
+            margin: 3mm 0 4mm 0;
             color: #ff69b4;
             font-size: 11pt;
+            opacity: 0.6;
         }
 
         /* Блок із сторонами угоди */
@@ -364,13 +369,16 @@
             }
 
             .main-title {
-                font-size: 10pt; /* Further reduced size for better A4 printing */
-                margin-bottom: 0.2mm; /* Further reduced margin for A4 fit */
+                font-size: 11pt; /* Optimized for print */
+                margin-bottom: 1mm;
+                margin-top: 1mm;
+                padding: 1.5mm 0;
             }
 
             .subtitle {
-                font-size: 8pt; /* Further reduced size for better A4 printing */
-                margin: 0.5mm 0; /* Further reduced margin for A4 fit */
+                font-size: 9pt; /* Optimized for print */
+                margin: 1mm 0 2mm 0;
+                padding-bottom: 1mm;
             }
 
             .header-info {
@@ -379,8 +387,9 @@
             }
 
             .divider {
-                margin: 0.8mm 0; /* Slightly less margin */
-                font-size: 10pt; /* Slightly smaller divider */
+                margin: 1.5mm 0 2mm 0;
+                font-size: 10pt;
+                opacity: 0.5;
             }
 
             .parties-block {
@@ -667,7 +676,7 @@
                         <span class="signature-emoji">❤️</span>
                     </div>
 
-                    <div class="signature-block" style="text-align: center; margin-top: 4mm;">
+                    <div class="signature-block" style="text-align: center; margin-top: 8mm; padding-top: 3mm; border-top: 1px solid rgba(255,105,180,0.2);">
                         Дата: 22 листопада 2025 р.
                     </div>
            
