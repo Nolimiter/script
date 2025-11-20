@@ -10,7 +10,7 @@
     <style>
         @page {
             size: A4;
-            margin: 12mm 15mm;
+            margin: 10mm 12mm;
         }
 
         * {
@@ -21,8 +21,8 @@
 
         body {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 10pt;
-            line-height: 1.35;
+            font-size: 9pt;
+            line-height: 1.25;
             color: #2c2c2c;
             background: linear-gradient(135deg, #fff5f7 0%, #ffffff 50%, #fff5f7 100%);
             padding: 0;
@@ -32,7 +32,7 @@
         .container {
             max-width: 210mm;
             margin: 0 auto;
-            padding: 12mm 15mm;
+            padding: 10mm 12mm;
             background: white;
             position: relative;
             box-shadow: 0 0 30px rgba(255, 182, 193, 0.2);
@@ -41,11 +41,11 @@
         .container::before {
             content: '';
             position: absolute;
-            top: 8mm;
-            left: 8mm;
-            right: 8mm;
-            bottom: 8mm;
-            border: 2px solid;
+            top: 6mm;
+            left: 6mm;
+            right: 6mm;
+            bottom: 6mm;
+            border: 1.5px solid;
             border-image: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #ff6b9d 100%) 1;
             pointer-events: none;
             opacity: 0.4;
@@ -53,30 +53,30 @@
 
         .decorative-corner {
             position: absolute;
-            font-size: 24pt;
+            font-size: 18pt;
             color: #ff6b9d;
             opacity: 0.3;
         }
 
-        .corner-tl { top: 10mm; left: 10mm; }
-        .corner-tr { top: 10mm; right: 10mm; }
-        .corner-bl { bottom: 10mm; left: 10mm; }
-        .corner-br { bottom: 10mm; right: 10mm; }
+        .corner-tl { top: 7mm; left: 7mm; }
+        .corner-tr { top: 7mm; right: 7mm; }
+        .corner-bl { bottom: 7mm; left: 7mm; }
+        .corner-br { bottom: 7mm; right: 7mm; }
 
         .content-wrapper {
             position: relative;
             z-index: 1;
-            padding: 5mm;
+            padding: 3mm;
         }
 
         h1 {
             text-align: center;
             font-family: 'Playfair Display', serif;
-            font-size: 16pt;
+            font-size: 13pt;
             font-weight: 900;
-            margin-bottom: 3mm;
+            margin-bottom: 2mm;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             background: linear-gradient(135deg, #ff6b9d, #c44569, #ff6b9d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -89,8 +89,8 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            bottom: -8mm;
-            font-size: 14pt;
+            bottom: -5mm;
+            font-size: 11pt;
             color: #ff6b9d;
             animation: heartbeat 1.5s ease-in-out infinite;
         }
@@ -103,92 +103,93 @@
         .subtitle {
             text-align: center;
             font-family: 'Great Vibes', cursive;
-            font-size: 14pt;
-            margin-bottom: 6mm;
-            margin-top: 5mm;
+            font-size: 12pt;
+            margin-bottom: 3mm;
+            margin-top: 3mm;
             color: #c44569;
         }
 
         .location-date {
             text-align: right;
-            font-size: 10pt;
-            margin-bottom: 5mm;
+            font-size: 9pt;
+            margin-bottom: 3mm;
             font-style: italic;
             color: #666;
         }
 
         .parties {
             text-align: justify;
-            margin-bottom: 4mm;
-            font-size: 10pt;
+            margin-bottom: 2.5mm;
+            font-size: 9pt;
             background: linear-gradient(to right, #fff5f7, transparent);
-            padding: 2mm 3mm;
-            border-left: 3px solid #ff6b9d;
+            padding: 1.5mm 2mm;
+            border-left: 2px solid #ff6b9d;
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            margin-top: 3mm;
-            margin-bottom: 2mm;
-            font-size: 11pt;
+            margin-top: 2mm;
+            margin-bottom: 1.5mm;
+            font-size: 10pt;
             color: #c44569;
             border-bottom: 1px solid #ffe0e8;
-            padding-bottom: 1mm;
+            padding-bottom: 0.5mm;
         }
 
         .section-content {
             text-align: justify;
-            margin-bottom: 2mm;
-            font-size: 10pt;
+            margin-bottom: 1.5mm;
+            font-size: 9pt;
         }
 
         .subsection {
-            margin-left: 5mm;
-            margin-bottom: 1.5mm;
+            margin-left: 4mm;
+            margin-bottom: 1mm;
             text-align: justify;
-            font-size: 10pt;
+            font-size: 9pt;
         }
 
         .list-item {
-            margin-left: 8mm;
-            margin-bottom: 1mm;
-            text-indent: -3mm;
-            padding-left: 3mm;
+            margin-left: 6mm;
+            margin-bottom: 0.8mm;
+            text-indent: -2.5mm;
+            padding-left: 2.5mm;
             position: relative;
+            font-size: 9pt;
         }
 
         .list-item::before {
             content: '♥';
             position: absolute;
-            left: -3mm;
+            left: -2.5mm;
             color: #ff6b9d;
-            font-size: 8pt;
+            font-size: 7pt;
         }
 
         .signatures {
-            margin-top: 5mm;
-            font-size: 10pt;
+            margin-top: 3mm;
+            font-size: 9pt;
             background: linear-gradient(to bottom, transparent, #fff5f7);
-            padding: 3mm;
+            padding: 2mm;
             border-radius: 2mm;
         }
 
         .signature-block {
-            margin-bottom: 3mm;
-            padding: 2mm;
+            margin-bottom: 2mm;
+            padding: 1.5mm;
         }
 
         .signature-line {
             display: inline-block;
-            width: 180px;
-            border-bottom: 2px dotted #ff6b9d;
-            margin: 0 2mm;
+            width: 150px;
+            border-bottom: 1.5px dotted #ff6b9d;
+            margin: 0 1.5mm;
         }
 
         .footer {
-            margin-top: 3mm;
-            font-size: 9pt;
+            margin-top: 2mm;
+            font-size: 8pt;
             font-style: italic;
             text-align: center;
             color: #999;
@@ -197,9 +198,9 @@
 
         .blank-line {
             display: inline-block;
-            width: 220px;
+            width: 180px;
             border-bottom: 1px dotted #c44569;
-            margin: 0 2mm;
+            margin: 0 1.5mm;
         }
 
         strong {
@@ -220,16 +221,20 @@
             }
 
             .content-wrapper {
-                padding: 5mm;
+                padding: 3mm;
             }
 
             @page {
                 size: A4;
-                margin: 12mm 15mm;
+                margin: 10mm 12mm;
             }
 
             h1::after {
                 animation: none;
+            }
+
+            .decorative-corner {
+                opacity: 0.2;
             }
         }
 
