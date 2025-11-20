@@ -57,18 +57,18 @@
         /* Декоративні серця в кутах */
         .heart-corner {
             position: absolute;
-            font-size: 12pt; /* Зменшено розмір серця */
+            font-size: 8pt; /* Дуже маленький розмір */
             color: #ff69b4;
-            opacity: 0.15;
-            z-index: 1; /* Ensure hearts are below content */
-            padding: 4mm; /* Максимальний відступ навколо серця */
-            pointer-events: none; /* Заборонити взаємодію з мишкою */
+            opacity: 0.08; /* Дуже прозорі */
+            z-index: 0; /* За текстом */
+            pointer-events: none; /* Заборонити взаємодію */
+            user-select: none; /* Заборонити виділення */
         }
 
-        .heart-tl { top: 14mm; left: 14mm; }
-        .heart-tr { top: 14mm; right: 14mm; transform: scaleX(-1); }
-        .heart-bl { bottom: 14mm; left: 14mm; transform: scaleY(-1); }
-        .heart-br { bottom: 14mm; right: 14mm; transform: scale(-1); }
+        .heart-tl { top: 8mm; left: 8mm; }
+        .heart-tr { top: 8mm; right: 8mm; transform: scaleX(-1); }
+        .heart-bl { bottom: 8mm; left: 8mm; transform: scaleY(-1); }
+        .heart-br { bottom: 8mm; right: 8mm; transform: scale(-1); }
 
         /* Додаткові відступи для запобігання накладання тексту на серця */
         .inner-border {
@@ -274,11 +274,12 @@
         }
 
         .list-item::before {
-            content: '•';
+            content: '❤';
             position: absolute;
             left: 0;
             color: #ff69b4;
-            font-size: 10pt;
+            font-size: 8pt; /* Трохи менше */
+            opacity: 0.7; /* Трохи прозоріше */
         }
 
         /* Блок підписів */
@@ -359,15 +360,10 @@
             }
 
             .heart-corner {
-                font-size: 4pt; /* Even smaller hearts for print */
-                opacity: 0.01;
-                padding: 5mm; /* Maximum padding for print */
+                font-size: 3pt; /* Мінімальний розмір для друку */
+                opacity: 0.02; /* Майже невидимі */
+                display: none; /* Приховати при друку */
             }
-
-            .heart-tl { top: 19mm; left: 19mm; }
-            .heart-tr { top: 19mm; right: 19mm; transform: scaleX(-1); }
-            .heart-bl { bottom: 19mm; left: 19mm; transform: scaleY(-1); }
-            .heart-br { bottom: 19mm; right: 19mm; transform: scale(-1); }
 
             .main-title {
                 font-size: 10pt; /* Further reduced size for better A4 printing */
@@ -459,7 +455,8 @@
             }
 
             .list-item::before {
-                font-size: 7pt; /* Further reduced bullets */
+                font-size: 6pt; /* Менші серця для друку */
+                opacity: 0.5; /* Прозоріші для друку */
             }
 
             .signatures-section {
@@ -510,10 +507,18 @@
     <div class="main-frame">
         <div class="outer-border">
             <div class="inner-border">
+                <!-- Декоративні серця -->
+                <div class="heart-corner heart-tl">❤</div>
+                <div class="heart-corner heart-tr">❤</div>
+                <div class="heart-corner heart-bl">❤</div>
+                <div class="heart-corner heart-br">❤</div>
+
                 <!-- Заголовок -->
                 <h1 class="main-title">УГОДА ПРО ЕКСКЛЮЗИВНЕ РОМАНТИЧНЕ ПАРТНЕРСТВО</h1>
 
                 <div class="subtitle">( «Пропозиція, від якої неможливо відмовитись» )</div>
+
+                <div class="divider">❤</div>
 
                 <!-- Сторони угоди -->
                 <div class="parties-block">
