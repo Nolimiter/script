@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Угода про романтичне партнерство</title>
+    <title>Угода про ексклюзивне романтичне партнерство</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Playfair+Display:wght@400;700;900&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         @page {
             size: A4;
-            margin: 12mm 15mm;
+            margin: 8mm;
         }
 
         * {
@@ -20,346 +20,667 @@
         }
 
         body {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 10pt;
+            font-family: 'Crimson Pro', serif;
+            font-size: 10.5pt;
             line-height: 1.35;
-            color: #2c2c2c;
-            background: linear-gradient(135deg, #fff5f7 0%, #ffffff 50%, #fff5f7 100%);
-            padding: 0;
+            color: #333;
+            background: white;
             margin: 0;
+            padding: 0;
         }
 
-        .container {
+        /* Головний контейнер з рамкою */
+        .main-frame {
+            width: 100%;
             max-width: 210mm;
             margin: 0 auto;
-            padding: 12mm 15mm;
+            padding: 2mm;
+            position: relative;
             background: white;
+        }
+
+        /* Зовнішня рамка з точками */
+        .outer-border {
+            border: 2px dotted #ff69b4;
+            padding: 2mm;
+            height: 100%;
             position: relative;
-            box-shadow: 0 0 30px rgba(255, 182, 193, 0.2);
         }
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 8mm;
-            left: 8mm;
-            right: 8mm;
-            bottom: 8mm;
-            border: 2px solid;
-            border-image: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #ff6b9d 100%) 1;
-            pointer-events: none;
-            opacity: 0.4;
-        }
-
-        .decorative-corner {
-            position: absolute;
-            font-size: 24pt;
-            color: #ff6b9d;
-            opacity: 0.3;
-        }
-
-        .corner-tl { top: 10mm; left: 10mm; }
-        .corner-tr { top: 10mm; right: 10mm; }
-        .corner-bl { bottom: 10mm; left: 10mm; }
-        .corner-br { bottom: 10mm; right: 10mm; }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
+        /* Внутрішня рамка */
+        .inner-border {
+            border: 1px solid #ff69b4;
             padding: 5mm;
+            background: linear-gradient(to bottom, rgba(255,240,245,0.3), rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, rgba(255,240,245,0.3));
         }
 
-        h1 {
+        /* Декоративні серця в кутах */
+        .heart-corner {
+            position: absolute;
+            font-size: 12pt; /* Зменшено розмір серця */
+            color: #ff69b4;
+            opacity: 0.15;
+            z-index: 1; /* Ensure hearts are below content */
+            padding: 4mm; /* Максимальний відступ навколо серця */
+            pointer-events: none; /* Заборонити взаємодію з мишкою */
+        }
+
+        .heart-tl { top: 14mm; left: 14mm; }
+        .heart-tr { top: 14mm; right: 14mm; transform: scaleX(-1); }
+        .heart-bl { bottom: 14mm; left: 14mm; transform: scaleY(-1); }
+        .heart-br { bottom: 14mm; right: 14mm; transform: scale(-1); }
+
+        /* Додаткові відступи для запобігання накладання тексту на серця */
+        .inner-border {
+            padding: 20mm 18mm; /* Максимальні відступи для запобігання накладання на серця */
+            background: linear-gradient(to bottom, rgba(255,240,245,0.3), rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, rgba(255,240,245,0.3));
+        }
+
+        /* Заголовок */
+        .main-title {
             text-align: center;
             font-family: 'Playfair Display', serif;
-            font-size: 16pt;
+            font-size: 13pt;
             font-weight: 900;
-            margin-bottom: 3mm;
+            color: #ff1493;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background: linear-gradient(135deg, #ff6b9d, #c44569, #ff6b9d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 0.5mm;
             position: relative;
         }
 
-        h1::after {
-            content: '❤';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: -8mm;
-            font-size: 14pt;
-            color: #ff6b9d;
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.1); }
-        }
-
+        /* Підзаголовок */
         .subtitle {
             text-align: center;
-            font-family: 'Great Vibes', cursive;
-            font-size: 14pt;
-            margin-bottom: 6mm;
-            margin-top: 5mm;
-            color: #c44569;
+            font-family: 'EB Garamond', serif;
+            font-size: 11pt;
+            font-style: italic;
+            color: #ff69b4;
+            margin: 1.5mm 0;
         }
 
-        .location-date {
+        /* Місце та дата */
+        .header-info {
             text-align: right;
             font-size: 10pt;
-            margin-bottom: 5mm;
-            font-style: italic;
             color: #666;
+            margin: 2mm 0;
+            font-style: italic;
         }
 
-        .parties {
-            text-align: justify;
-            margin-bottom: 4mm;
-            font-size: 10pt;
-            background: linear-gradient(to right, #fff5f7, transparent);
-            padding: 2mm 3mm;
-            border-left: 3px solid #ff6b9d;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            margin-top: 3mm;
-            margin-bottom: 2mm;
+        /* Розділювач з сердечками */
+        .divider {
+            text-align: center;
+            margin: 2mm 0;
+            color: #ff69b4;
             font-size: 11pt;
-            color: #c44569;
-            border-bottom: 1px solid #ffe0e8;
-            padding-bottom: 1mm;
         }
 
-        .section-content {
-            text-align: justify;
-            margin-bottom: 2mm;
+        /* Блок із сторонами угоди */
+        .parties-block {
+            background: linear-gradient(90deg, rgba(255,192,203,0.1), transparent);
+            padding: 1.5mm 2mm;
+            margin: 2mm 0;
+            border-left: 2px solid #ff69b4;
+        }
+
+        .parties-header {
+            font-weight: 700;
+            color: #ff1493;
+            text-transform: uppercase;
             font-size: 10pt;
-        }
-
-        .subsection {
-            margin-left: 5mm;
-            margin-bottom: 1.5mm;
-            text-align: justify;
-            font-size: 10pt;
-        }
-
-        .list-item {
-            margin-left: 8mm;
             margin-bottom: 1mm;
-            text-indent: -3mm;
-            padding-left: 3mm;
+        }
+
+        /* Інформація про сторони */
+        .party-info {
+            margin: 2mm 0;
+            text-align: justify;
+            font-size: 11.5pt;
+        }
+
+        /* Нові стилі для покращеного блоку сторін */
+        .party-section {
+            background: linear-gradient(135deg, rgba(255,240,245,0.5), rgba(255,255,255,0.8));
+            border: 1px solid rgba(255,105,180,0.3);
+            border-radius: 2mm;
+            padding: 2mm;
+            margin: 2mm 0;
+            text-align: center;
+        }
+
+        .party-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #ff1493;
+            margin-bottom: 0.3mm;
+        }
+
+        .party-description {
+            font-size: 10pt;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1mm;
+        }
+
+        .party-name {
+            font-size: 10pt;
+            color: #333;
+            text-align: left;
+            padding-left: 2mm;
+        }
+
+        .party-divider {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 13pt;
+            color: #ff69b4;
+            margin: 1mm 0;
+            font-style: italic;
+        }
+
+        .party-footer {
+            text-align: center;
+            font-size: 10pt;
+            color: #666;
+            margin-top: 2mm;
+            padding: 1.5mm;
+            background: rgba(255,192,203,0.1);
+            border-radius: 2mm;
+            font-style: italic;
+        }
+
+        .party-footer em {
+            color: #ff69b4;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        /* Лінія для заповнення */
+        .fill-line {
+            display: inline-block;
+            width: 35mm;
+            border-bottom: 1px dotted #ff69b4;
+            margin: 0 1mm;
+        }
+
+        /* Довга лінія для імен */
+        .name-line {
+            display: inline-block;
+            width: 55mm;
+            border-bottom: 1px dotted #ff69b4;
+            margin: 0 2mm;
+        }
+
+        /* Заголовки розділів */
+        .section-header {
+            font-family: 'EB Garamond', serif;
+            font-weight: 600;
+            font-size: 10.5pt;
+            color: #ff1493;
+            margin-top: 1.5mm;
+            margin-bottom: 1mm;
+            padding-bottom: 0.3mm;
+            border-bottom: 1px solid rgba(255,105,180,0.3);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-number {
+            background: #ff69b4;
+            color: white;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9pt;
+            margin-right: 2mm;
+        }
+
+        /* Параграфи */
+        .paragraph {
+            margin-left: 4mm;
+            margin-bottom: 2mm;
+            text-align: justify;
+            font-size: 10pt;
+            line-height: 1.25;
+        }
+
+        .paragraph-number {
+            color: #ff69b4;
+            font-weight: 600;
+        }
+
+        /* Підпараграфи */
+        .sub-paragraph {
+            margin-left: 4mm;
+            margin-bottom: 0.8mm;
+            font-size: 10pt;
+            font-weight: 600;
+            color: #d1006c;
+        }
+
+        /* Елементи списку */
+        .list-item {
+            margin-left: 6mm;
+            margin-bottom: 0.6mm;
             position: relative;
+            padding-left: 3mm;
+            font-size: 10pt;
+            line-height: 1.25;
         }
 
         .list-item::before {
-            content: '♥';
+            content: '❤';
             position: absolute;
-            left: -3mm;
-            color: #ff6b9d;
-            font-size: 8pt;
+            left: 0;
+            color: #ff69b4;
+            font-size: 10pt;
         }
 
-        .signatures {
-            margin-top: 5mm;
-            font-size: 10pt;
-            background: linear-gradient(to bottom, transparent, #fff5f7);
-            padding: 3mm;
+        /* Блок підписів */
+        .signatures-section {
+            margin-top: 3mm;
+            padding: 2mm;
+            background: linear-gradient(180deg, transparent, rgba(255,192,203,0.1));
             border-radius: 2mm;
         }
 
         .signature-block {
-            margin-bottom: 3mm;
-            padding: 2mm;
+            margin: 2mm 0;
+            font-size: 10pt;
+            line-height: 1.35;
         }
 
         .signature-line {
             display: inline-block;
-            width: 180px;
-            border-bottom: 2px dotted #ff6b9d;
+            width: 35mm;
+            border-bottom: 1px dotted #ff69b4;
             margin: 0 2mm;
         }
 
+        .signature-emoji {
+            color: #ff69b4;
+            font-size: 11pt;
+            margin-left: 1mm;
+        }
+
+        /* Футер */
         .footer {
-            margin-top: 3mm;
-            font-size: 9pt;
-            font-style: italic;
             text-align: center;
+            font-size: 10pt;
             color: #999;
-            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            margin-top: 2mm;
+            padding: 1mm;
         }
 
-        .blank-line {
-            display: inline-block;
-            width: 220px;
-            border-bottom: 1px dotted #c44569;
-            margin: 0 2mm;
-        }
-
+        /* Виділений текст */
         strong {
-            color: #c44569;
+            color: #d1006c;
             font-weight: 600;
         }
 
+        .highlight {
+            color: #ff1493;
+            font-weight: 700;
+        }
+
+        /* Медіа-запити для друку */
         @media print {
+            @page {
+                size: A4;
+                margin: 8mm;
+            }
+
             body {
                 margin: 0;
                 padding: 0;
-                background: white;
+                font-size: 7.5pt; /* Further reduced size for better A4 printing */
+                line-height: 1.15; /* Even tighter line height for better A4 printing */
+                font-family: 'Crimson Pro', serif; /* Ensure print uses same elegant font */
             }
 
-            .container {
+            .main-frame {
                 padding: 0;
-                box-shadow: none;
+                page-break-inside: avoid;
             }
 
-            .content-wrapper {
-                padding: 5mm;
+            .outer-border {
+                padding: 0.7mm; /* Slightly reduced padding */
+                border-width: 1px;
             }
 
-            @page {
-                size: A4;
-                margin: 12mm 15mm;
+            .inner-border {
+                padding: 20mm 18mm; /* Maximum padding for print to prevent heart overlap */
             }
 
-            h1::after {
-                animation: none;
+            .heart-corner {
+                font-size: 4pt; /* Even smaller hearts for print */
+                opacity: 0.01;
+                padding: 5mm; /* Maximum padding for print */
+            }
+
+            .heart-tl { top: 19mm; left: 19mm; }
+            .heart-tr { top: 19mm; right: 19mm; transform: scaleX(-1); }
+            .heart-bl { bottom: 19mm; left: 19mm; transform: scaleY(-1); }
+            .heart-br { bottom: 19mm; right: 19mm; transform: scale(-1); }
+
+            .main-title {
+                font-size: 10pt; /* Further reduced size for better A4 printing */
+                margin-bottom: 0.2mm; /* Further reduced margin for A4 fit */
+            }
+
+            .subtitle {
+                font-size: 8pt; /* Further reduced size for better A4 printing */
+                margin: 0.5mm 0; /* Further reduced margin for A4 fit */
+            }
+
+            .header-info {
+                font-size: 10pt; /* Slightly smaller info */
+                margin: 0.8mm 0; /* Slightly less margin */
+            }
+
+            .divider {
+                margin: 0.8mm 0; /* Slightly less margin */
+                font-size: 10pt; /* Slightly smaller divider */
+            }
+
+            .parties-block {
+                padding: 0.8mm; /* Slightly less padding */
+                margin: 0.8mm 0; /* Slightly less margin */
+            }
+
+            .party-section {
+                padding: 0.8mm; /* Slightly less padding */
+                margin: 0.8mm 0; /* Slightly less margin */
+            }
+
+            .party-title {
+                font-size: 9.5pt; /* Optimized size for A4 printing */
+                margin-bottom: 0.2mm; /* Slightly less margin */
+            }
+
+            .party-description {
+                font-size: 10pt; /* Slightly smaller text */
+                margin-bottom: 0.4mm; /* Slightly less margin */
+            }
+
+            .party-name {
+                font-size: 10pt; /* Slightly smaller text */
+            }
+
+            .party-divider {
+                font-size: 9pt; /* Slightly smaller text */
+                margin: 0.4mm 0; /* Slightly less margin */
+            }
+
+            .party-footer {
+                font-size: 8pt; /* Slightly smaller text */
+                padding: 0.8mm; /* Slightly less padding */
+                margin-top: 0.8mm; /* Slightly less margin */
+            }
+
+            .section-header {
+                margin-top: 0.6mm; /* Further reduced margin for A4 fit */
+                margin-bottom: 0.3mm; /* Further reduced margin for A4 fit */
+                font-size: 8.5pt; /* Further reduced size for better A4 printing */
+                font-family: 'EB Garamond', serif; /* Maintain elegant font in print */
+                page-break-after: avoid;
+            }
+
+            .section-number {
+                width: 13px; /* Slightly smaller circles */
+                height: 13px;
+                font-size: 7.5pt; /* Slightly smaller numbers */
+                margin-right: 1.2mm; /* Slightly less margin */
+            }
+
+            .paragraph {
+                margin-bottom: 0.3mm; /* Further reduced margin for A4 fit */
+                font-size: 8pt; /* Further reduced size for better A4 printing */
+                margin-left: 1.5mm; /* Further reduced margin for A4 fit */
+            }
+
+            .sub-paragraph {
+                margin-bottom: 0.3mm; /* Further reduced margin for A4 fit */
+                font-size: 8pt; /* Further reduced size for better A4 printing */
+                margin-left: 2mm; /* Further reduced margin for A4 fit */
+            }
+
+            .list-item {
+                margin-bottom: 0.1mm; /* Further reduced margin for A4 fit */
+                font-size: 7pt; /* Further reduced size for better A4 printing */
+                margin-left: 2.5mm; /* Further reduced margin for A4 fit */
+                padding-left: 1mm; /* Further reduced padding for A4 fit */
+            }
+
+            .list-item::before {
+                font-size: 7pt; /* Further reduced hearts */
+            }
+
+            .signatures-section {
+                page-break-inside: avoid;
+                margin-top: 1.5mm; /* Slightly less margin */
+                padding: 1.2mm; /* Slightly less padding */
+            }
+
+            .signature-block {
+                margin: 1.2mm 0; /* Slightly less margin */
+                font-size: 10pt; /* Slightly smaller text */
+            }
+
+            .signature-line {
+                width: 28mm; /* Slightly shorter line */
+            }
+
+            .signature-emoji {
+                font-size: 8.5pt; /* Slightly smaller emoji */
+            }
+
+            .footer {
+                font-size: 7.5pt; /* Slightly smaller text */
+                margin-top: 0.8mm; /* Slightly less margin */
+                padding: 0.4mm; /* Slightly less padding */
+            }
+
+            .name-line {
+                width: 35mm; /* Slightly shorter line */
             }
         }
 
+        /* Медіа-запити для екрану */
         @media screen {
-            .container {
-                margin: 20px auto;
-                border-radius: 3mm;
+            body {
+                background: #f9f9f9;
+                padding: 10mm;
+            }
+
+            .main-frame {
+                box-shadow: 0 5px 30px rgba(255,105,180,0.2);
+                background: white;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="decorative-corner corner-tl">❤</div>
-        <div class="decorative-corner corner-tr">❤</div>
-        <div class="decorative-corner corner-bl">❤</div>
-        <div class="decorative-corner corner-br">❤</div>
+    <div class="main-frame">
+        <div class="outer-border">
+            <div class="inner-border">
+                <!-- Декоративні серця -->
+                <div class="heart-corner heart-tl">❤</div>
+                <div class="heart-corner heart-tr">❤</div>
+                <div class="heart-corner heart-bl">❤</div>
+                <div class="heart-corner heart-br">❤</div>
 
-        <div class="content-wrapper">
-            <h1>УГОДА ПРО ЕКСКЛЮЗИВНЕ РОМАНТИЧНЕ ПАРТНЕРСТВО</h1>
+                <!-- Заголовок -->
+                <h1 class="main-title">УГОДА ПРО ЕКСКЛЮЗИВНЕ РОМАНТИЧНЕ ПАРТНЕРСТВО</h1>
 
-            <div class="subtitle">(«Пропозиція, від якої неможливо відмовитись»)</div>
+                <div class="subtitle">( «Пропозиція, від якої неможливо відмовитись» )</div>
 
-            <div class="location-date">м. Кропивницький&nbsp;&nbsp;&nbsp;&nbsp;Дата: 20 листопада 2025 р.</div>
 
-            <div class="parties">
-                <strong>ЦЯ УГОДА УКЛАДЕНА МІЖ:</strong>
-            </div>
 
-            <div class="section-content">
-                <strong>СТОРОНОЮ 1</strong> (далі — «Хлопець», «Красунчик» або «Той, хто платить за каву»), в особі <span class="blank-line">&nbsp;</span>, та
-            </div>
+                <div class="divider">❤ ❤ ❤</div>
 
-            <div class="section-content">
-                <strong>СТОРОНОЮ 2</strong> (далі — «Дівчина», «Муза» або «Найкрасивіша у світі»), в особі <span class="blank-line">&nbsp;</span>.
-            </div>
-
-            <div class="section-content">
-                Разом іменовані як «Сторони», а кожна окремо — «Моя квіточка» та «Моє сонечко».
-            </div>
-
-        <div class="section-title">1. ПРЕДМЕТ ДОГОВОРУ</div>
-
-        <div class="subsection">
-            1.1. Предметом цього Договору є добровільна згода Сторін на зміну статусу з «Неофіційно пара» на «Офіційно пара» (офіційно зустрічаються).
-        </div>
-
-        <div class="subsection">
-            1.2. Метою Договору є спільне отримання щастя, регулярні обійми та легалізація близькості.
-        </div>
-
-        <div class="section-title">2. ОБОВ'ЯЗКИ СТОРІН</div>
-
-        <div class="subsection">
-            <strong>2.1. Сторона 1 (Хлопець) зобов'язується:</strong>
-        </div>
-
-        <div class="list-item">Офіційно погодитись на статус Хлопця Сторони 1.</div>
-        <div class="list-item">Дивитися на Сторону 2 закоханими очима не менше 5 разів на день.</div>
-        <div class="list-item">Вбивати павуків та відкривати тугі банки з огірками.</div>
-        <div class="list-item">Терпляче чекати, поки Сторона 2 збереться на вихід (навіть якщо це займає "ще 5 хвилиночок").</div>
-        <div class="list-item">Слухати всі пісні які любить співати Сторона 2.</div>
-
-        <div class="subsection">
-            <strong>2.2. Сторона 2 (Дівчина) зобов'язується:</strong>
-        </div>
-
-        <div class="list-item">Офіційно погодитись на статус Дівчини Сторони 1.</div>
-        <div class="list-item">Дивитися на Сторону 1 закоханими очима не менше 5 разів на день.</div>
-        <div class="list-item">Допомагати у побуті Стороні 1.</div>
-        <div class="list-item">Вибирати фільм для перегляду не довше, ніж триває сам фільм.</div>
-        <div class="list-item">Отримувати компліменти без заперечень типу "ой, ні, я сьогодні не виспалась".</div>
-
-        <div class="section-title">3. ПОЛІТИКА ЩОДО ЇЖІ ТА РЕСУРСІВ</div>
-
-        <div class="subsection">
-            3.1. Сторона 2 має беззаперечне право вкрасти шматочок їжі з тарілки Сторони 1, навіть якщо вона казала "я не голодна".
-        </div>
-
-        <div class="section-title">4. ВИРІШЕННЯ СПОРІВ</div>
-
-        <div class="subsection">
-            4.1. Усі суперечки вирішуються шляхом переговорів, обіймів або замовлення смачненького.
-        </div>
-
-        <div class="subsection">
-            4.2. Забороняється лягати спати посвареними (Дозволяється бурчати, але спати треба в обнімку).
-        </div>
-
-        <div class="section-title">5. ТЕРМІН ДІЇ ДОГОВОРУ</div>
-
-        <div class="subsection">
-            5.1. Цей Договір набуває чинності з моменту підписання.
-        </div>
-
-        <div class="subsection">
-            5.2. Термін дії: Безстроково.
-        </div>
-
-        <div class="section-title">6. ФОРС-МАЖОРНІ ОБСТАВИНИ</div>
-
-        <div class="subsection">
-            6.1. Сторони звільняються від відповідальності за поганий настрій, якщо вони:
-        </div>
-
-        <div class="list-item">Голодні.</div>
-        <div class="list-item">Не виспались.</div>
-        <div class="list-item">Програли у відеогрі (стосується Сторони 1).</div>
-        <div class="list-item">Зламали ніготь (стосується Сторони 2).</div>
-
-            <div class="signatures">
-                <div class="section-title">ПІДПИСИ СТОРІН</div>
-
-                <div class="signature-block">
-                    Я, Сторона 2, ознайомившись з умовами, погоджуюсь стати дівчиною Сторони 1:<br>
-                    ТАК, ЗГОДНА (підпис): <span class="signature-line">&nbsp;</span> 💋
+                <!-- Сторони угоди -->
+                <div class="parties-block">
+                    <div class="parties-header">ЦЯ УГОДА УКЛАДЕНА МІЖ:</div>
                 </div>
 
-                <div class="signature-block">
-                    Я, Сторона 1, ознайомившись з умовами, погоджуюсь стати хлопцем Сторони 2:<br>
-                    ТАК, ЗГОДЕН (підпис): <span class="signature-line">&nbsp;</span> ❤️
+                <div class="party-section">
+                    <div class="party-title">СТОРОНА 1</div>
+                    <div class="party-description">
+                        «Хлопець», «Красунчик» або «Той, хто платить за каву»
+                    </div>
+                    <div class="party-name">
+                        В особі: <span class="name-line">&nbsp;</span>
+                    </div>
                 </div>
 
-                <div class="signature-block">
-                    Дата: 22 листопада 2025 р.
-                </div>
-            </div>
+          
 
-            <div class="footer">
-                (Цей документ скріплено чесним словом та метеликами в животі, та фактом зберігання документа в цілості)
+                <div class="party-section">
+                    <div class="party-title">СТОРОНА 2</div>
+                    <div class="party-description">
+                        «Дівчина», «Муза» або «Найкрасивіша у світі»
+                    </div>
+                    <div class="party-name">
+                        В особі: <span class="name-line">&nbsp;</span>
+                    </div>
+                </div>
+
+                <div class="party-footer">
+                    Разом іменовані як <em>«Сторони»</em>,<br>
+                    а кожна окремо — <em>«Моя квіточка»</em> та <em>«Моє сонечко»</em>
+                </div>
+
+                <!-- Розділ 1 -->
+                <div class="section-header">
+                    <span class="section-number">1</span>
+                    ПРЕДМЕТ ДОГОВОРУ
+                </div>
+
+                <div class="paragraph">
+                    <span class="paragraph-number">1.1.</span> Предметом цього Договору є добровільна згода Сторін на зміну статусу з «Неофіційно пара» на «Офіційно пара» (офіційно зустрічаються).
+                </div>
+
+                <div class="paragraph">
+                    <span class="paragraph-number">1.2.</span> Метою Договору є спільне отримання щастя, регулярні обійми та легалізація близькості.
+                </div>
+
+                <!-- Розділ 2 -->
+                <div class="section-header">
+                    <span class="section-number">2</span>
+                    ОБОВ'ЯЗКИ СТОРІН
+                </div>
+
+                <div class="sub-paragraph">
+                    2.1. Сторона 1 (Хлопець) зобов'язується:
+                </div>
+
+                <div class="list-item">Офіційно погодитись на статус Хлопця Сторони 1</div>
+                <div class="list-item">Дивитися на Сторону 2 закоханими очима не менше 5 разів на день</div>
+                <div class="list-item">Вбивати павуків та відкривати тугі банки з огірками</div>
+                <div class="list-item">Терпляче чекати, поки Сторона 2 збереться на вихід (навіть якщо це займає "ще 5 хвилиночок")</div>
+                <div class="list-item">Слухати всі пісні які любить співати Сторона 2</div>
+
+                <div class="sub-paragraph">
+                    2.2. Сторона 2 (Дівчина) зобов'язується:
+                </div>
+
+                <div class="list-item">Офіційно погодитись на статус Дівчини Сторони 1</div>
+                <div class="list-item">Дивитися на Сторону 1 закоханими очима не менше 5 разів на день</div>
+                <div class="list-item">Допомагати у побуті Стороні 1</div>
+                <div class="list-item">Вибирати фільм для перегляду не довше, ніж триває сам фільм</div>
+                <div class="list-item">Отримувати компліменти без заперечень типу "ой, ні, я сьогодні не виспалась"</div>
+                &nbsp;<br>
+
+                <!-- Розділ 3 -->
+                <div class="section-header">
+                    <span class="section-number">3</span>
+                    ПОЛІТИКА ЩОДО ЇЖІ
+                </div>
+
+                <div class="paragraph">
+                    <span class="paragraph-number">3.1.</span> Сторона 2 має беззаперечне право вкрасти шматочок їжі з тарілки Сторони 1, навіть якщо вона казала "я не голодна".
+                </div>
+
+                <div class="paragraph">
+                    <span class="paragraph-number">3.2.</span> Сторона 1 має право на «останній шматочок», тільки якщо явно казав "я це собі залишав" (і втрачає це право, якщо казав "я не голодний").
+                </div>
+
+                <!-- Розділ 4 -->
+                <div class="section-header">
+                    <span class="section-number">4</span>
+                    ВИРІШЕННЯ СПОРІВ
+                </div>
+
+                <div class="paragraph">
+                    <span class="paragraph-number">4.1.</span> Усі суперечки вирішуються шляхом переговорів, обіймів або замовлення смачненького.
+                </div>
+
+                <div class="paragraph">
+                    <span class="paragraph-number">4.2.</span> Забороняється лягати спати посвареними. Дозволяється бурчати, але спати треба в обнімку.
+                </div>
+
+                <!-- Розділ 5 -->
+                <div class="section-header">
+                    <span class="section-number">5</span>
+                    ТЕРМІН ДІЇ ДОГОВОРУ
+                </div>
+
+                <div class="paragraph">
+                    <span class="paragraph-number">5.1.</span> Цей Договір набуває чинності з моменту підписання.
+                </div>
+
+                <div class="paragraph">
+                    <span class="paragraph-number">5.2.</span> Термін дії: Безстроково.
+                </div>
+
+                <!-- Розділ 6 -->
+                <div class="section-header">
+                    <span class="section-number">6</span>
+                    ФОРС-МАЖОРНІ ОБСТАВИНИ
+                </div>
+
+                <div class="paragraph">
+                    <span class="paragraph-number">6.1.</span> Сторони звільняються від відповідальності за поганий настрій, якщо вони:
+                </div>
+
+                <div class="list-item">Голодні</div>
+                <div class="list-item">Не виспались</div>
+                <div class="list-item">Програли у відеогрі (стосується Сторони 1)</div>
+                <div class="list-item">Зламали ніготь (стосується Сторони 2)</div>
+                &nbsp;<br>
+
+                <!-- Підписи -->
+                <div class="signatures-section">
+                    <div class="section-header" style="border: none;">
+                        ПІДПИСИ СТОРІН
+                    </div>
+
+                    <div class="signature-block">
+                        Я, Сторона 2, ознайомившись з умовами, погоджуюсь стати Дівчиною Сторони 1:<br>
+                        <strong>ТАК, ЗГОДНА</strong> (підпис): <span class="signature-line">&nbsp;</span>
+                        <span class="signature-emoji">💋</span>
+                    </div>
+
+                    <div class="signature-block">
+                        Я, Сторона 1, ознайомившись з умовами, погоджуюсь стати Хлопцем Сторони 2:<br>
+                        <strong>ТАК, ЗГОДЕН</strong> (підпис): <span class="signature-line">&nbsp;</span>
+                        <span class="signature-emoji">❤️</span>
+                    </div>
+
+                    <div class="signature-block" style="text-align: center; margin-top: 4mm;">
+                        Дата: 22 листопада 2025 р.
+                    </div>
+           
+                    <div class="divider"></div>
+
+                </div>
             </div>
         </div>
     </div>
