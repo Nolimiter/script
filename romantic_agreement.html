@@ -10,7 +10,7 @@
     <style>
         @page {
             size: A4;
-            margin: 10mm;
+            margin: 15mm;
         }
 
         * {
@@ -20,176 +20,149 @@
         }
 
         body {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 7.5pt;
-            line-height: 1.15;
-            color: #2c2c2c;
-            background: linear-gradient(135deg, #fff5f7 0%, #ffffff 50%, #fff5f7 100%);
-            padding: 0;
             margin: 0;
+            padding: 0;
+            font-family: 'Cormorant Garamond', serif;
+            background: #f5f5f5;
         }
 
-        .container {
+        .content {
             width: 100%;
-            height: 100%;
+            padding: 8mm;
+            margin: 0 auto;
             background: white;
-            position: relative;
-            box-shadow: 0 0 30px rgba(255, 182, 193, 0.2);
+            font-size: 8pt;
+            line-height: 1.2;
+            color: #2c2c2c;
         }
 
-        .container::before {
-            content: '';
+        .border-frame {
+            border: 1.5px solid #ff6b9d;
+            padding: 6mm;
+            position: relative;
+        }
+
+        .corner-heart {
             position: absolute;
-            top: 3mm;
-            left: 3mm;
-            right: 3mm;
-            bottom: 3mm;
-            border: 1px solid #ff6b9d;
-            pointer-events: none;
+            font-size: 10pt;
+            color: #ff6b9d;
             opacity: 0.3;
         }
 
-        .decorative-corner {
-            position: absolute;
-            font-size: 12pt;
-            color: #ff6b9d;
-            opacity: 0.2;
-        }
-
-        .corner-tl { top: 3.5mm; left: 3.5mm; }
-        .corner-tr { top: 3.5mm; right: 3.5mm; }
-        .corner-bl { bottom: 3.5mm; left: 3.5mm; }
-        .corner-br { bottom: 3.5mm; right: 3.5mm; }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-            padding: 5mm 6mm;
-        }
+        .corner-tl { top: 1mm; left: 1mm; }
+        .corner-tr { top: 1mm; right: 1mm; }
+        .corner-bl { bottom: 1mm; left: 1mm; }
+        .corner-br { bottom: 1mm; right: 1mm; }
 
         h1 {
             text-align: center;
             font-family: 'Playfair Display', serif;
-            font-size: 10pt;
+            font-size: 11pt;
             font-weight: 900;
             margin-bottom: 1mm;
             text-transform: uppercase;
-            letter-spacing: 0.2px;
+            letter-spacing: 0.3px;
             color: #c44569;
-            position: relative;
         }
 
-        h1::after {
-            content: '❤';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: -3mm;
-            font-size: 8pt;
+        .heart-divider {
+            text-align: center;
             color: #ff6b9d;
+            font-size: 9pt;
+            margin: 1mm 0 2mm 0;
         }
 
         .subtitle {
             text-align: center;
             font-family: 'Great Vibes', cursive;
-            font-size: 9pt;
-            margin-bottom: 1.5mm;
-            margin-top: 1.5mm;
+            font-size: 10pt;
+            margin-bottom: 2mm;
             color: #c44569;
         }
 
         .location-date {
             text-align: right;
-            font-size: 7.5pt;
-            margin-bottom: 1.5mm;
+            font-size: 8pt;
+            margin-bottom: 2mm;
             font-style: italic;
             color: #666;
         }
 
         .parties {
-            text-align: justify;
-            margin-bottom: 1mm;
-            font-size: 7.5pt;
+            margin-bottom: 1.5mm;
+            padding: 1mm 2mm;
             background: linear-gradient(to right, #fff5f7, transparent);
-            padding: 0.5mm 1.5mm;
-            border-left: 1.5px solid #ff6b9d;
+            border-left: 2px solid #ff6b9d;
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            margin-top: 1mm;
-            margin-bottom: 0.7mm;
-            font-size: 8pt;
+            margin-top: 1.5mm;
+            margin-bottom: 0.8mm;
+            font-size: 9pt;
             color: #c44569;
-            border-bottom: 0.5px solid #ffe0e8;
-            padding-bottom: 0.2mm;
+            border-bottom: 1px solid #ffe0e8;
+            padding-bottom: 0.3mm;
         }
 
         .section-content {
             text-align: justify;
-            margin-bottom: 0.7mm;
-            font-size: 7.5pt;
+            margin-bottom: 1mm;
         }
 
         .subsection {
-            margin-left: 2.5mm;
-            margin-bottom: 0.5mm;
+            margin-left: 3mm;
+            margin-bottom: 0.7mm;
             text-align: justify;
-            font-size: 7.5pt;
         }
 
         .list-item {
-            margin-left: 4mm;
-            margin-bottom: 0.3mm;
-            text-indent: -1.5mm;
-            padding-left: 1.5mm;
+            margin-left: 5mm;
+            margin-bottom: 0.4mm;
             position: relative;
-            font-size: 7.5pt;
+            padding-left: 3mm;
         }
 
         .list-item::before {
             content: '♥';
             position: absolute;
-            left: -1.5mm;
+            left: 0;
             color: #ff6b9d;
-            font-size: 5pt;
+            font-size: 6pt;
         }
 
         .signatures {
-            margin-top: 1.5mm;
-            font-size: 7.5pt;
+            margin-top: 2mm;
+            padding: 2mm;
             background: linear-gradient(to bottom, transparent, #fff5f7);
-            padding: 1mm;
             border-radius: 1mm;
         }
 
         .signature-block {
-            margin-bottom: 1mm;
-            padding: 0.5mm;
+            margin-bottom: 1.5mm;
         }
 
         .signature-line {
             display: inline-block;
-            width: 110px;
+            width: 100px;
             border-bottom: 1px dotted #ff6b9d;
-            margin: 0 0.5mm;
+            margin: 0 1mm;
         }
 
         .footer {
-            margin-top: 1mm;
-            font-size: 6.5pt;
+            margin-top: 1.5mm;
+            font-size: 7pt;
             font-style: italic;
             text-align: center;
             color: #999;
-            font-family: 'Cormorant Garamond', serif;
         }
 
         .blank-line {
             display: inline-block;
-            width: 140px;
-            border-bottom: 0.5px dotted #c44569;
-            margin: 0 0.5mm;
+            width: 120px;
+            border-bottom: 1px dotted #c44569;
+            margin: 0 1mm;
         }
 
         strong {
@@ -199,57 +172,39 @@
 
         @media print {
             body {
-                margin: 0;
-                padding: 0;
                 background: white;
             }
 
-            .container {
-                box-shadow: none;
-                page-break-after: avoid;
-                page-break-inside: avoid;
-            }
-
-            .content-wrapper {
-                padding: 5mm 6mm;
+            .content {
+                margin: 0;
+                padding: 0;
             }
 
             @page {
                 size: A4;
-                margin: 10mm;
-            }
-
-            h1::after {
-                animation: none;
-            }
-
-            .decorative-corner {
-                opacity: 0.15;
-            }
-
-            .container::before {
-                border: 1px solid #ff6b9d;
+                margin: 15mm;
             }
         }
 
         @media screen {
-            .container {
+            .content {
+                max-width: 210mm;
                 margin: 20px auto;
-                border-radius: 3mm;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="decorative-corner corner-tl">❤</div>
-        <div class="decorative-corner corner-tr">❤</div>
-        <div class="decorative-corner corner-bl">❤</div>
-        <div class="decorative-corner corner-br">❤</div>
+    <div class="content">
+        <div class="border-frame">
+            <span class="corner-heart corner-tl">❤</span>
+            <span class="corner-heart corner-tr">❤</span>
+            <span class="corner-heart corner-bl">❤</span>
+            <span class="corner-heart corner-br">❤</span>
 
-        <div class="content-wrapper">
             <h1>УГОДА ПРО ЕКСКЛЮЗИВНЕ РОМАНТИЧНЕ ПАРТНЕРСТВО</h1>
-
+            <div class="heart-divider">❤</div>
             <div class="subtitle">(«Пропозиція, від якої неможливо відмовитись»)</div>
 
             <div class="location-date">м. Кропивницький&nbsp;&nbsp;&nbsp;&nbsp;Дата: 20 листопада 2025 р.</div>
@@ -270,74 +225,74 @@
                 Разом іменовані як «Сторони», а кожна окремо — «Моя квіточка» та «Моє сонечко».
             </div>
 
-        <div class="section-title">1. ПРЕДМЕТ ДОГОВОРУ</div>
+            <div class="section-title">1. ПРЕДМЕТ ДОГОВОРУ</div>
 
-        <div class="subsection">
-            1.1. Предметом цього Договору є добровільна згода Сторін на зміну статусу з «Неофіційно пара» на «Офіційно пара» (офіційно зустрічаються).
-        </div>
+            <div class="subsection">
+                1.1. Предметом цього Договору є добровільна згода Сторін на зміну статусу з «Неофіційно пара» на «Офіційно пара» (офіційно зустрічаються).
+            </div>
 
-        <div class="subsection">
-            1.2. Метою Договору є спільне отримання щастя, регулярні обійми та легалізація близькості.
-        </div>
+            <div class="subsection">
+                1.2. Метою Договору є спільне отримання щастя, регулярні обійми та легалізація близькості.
+            </div>
 
-        <div class="section-title">2. ОБОВ'ЯЗКИ СТОРІН</div>
+            <div class="section-title">2. ОБОВ'ЯЗКИ СТОРІН</div>
 
-        <div class="subsection">
-            <strong>2.1. Сторона 1 (Хлопець) зобов'язується:</strong>
-        </div>
+            <div class="subsection">
+                <strong>2.1. Сторона 1 (Хлопець) зобов'язується:</strong>
+            </div>
 
-        <div class="list-item">Офіційно погодитись на статус Хлопця Сторони 1.</div>
-        <div class="list-item">Дивитися на Сторону 2 закоханими очима не менше 5 разів на день.</div>
-        <div class="list-item">Вбивати павуків та відкривати тугі банки з огірками.</div>
-        <div class="list-item">Терпляче чекати, поки Сторона 2 збереться на вихід (навіть якщо це займає "ще 5 хвилиночок").</div>
-        <div class="list-item">Слухати всі пісні які любить співати Сторона 2.</div>
+            <div class="list-item">Офіційно погодитись на статус Хлопця Сторони 1.</div>
+            <div class="list-item">Дивитися на Сторону 2 закоханими очима не менше 5 разів на день.</div>
+            <div class="list-item">Вбивати павуків та відкривати тугі банки з огірками.</div>
+            <div class="list-item">Терпляче чекати, поки Сторона 2 збереться на вихід (навіть якщо це займає "ще 5 хвилиночок").</div>
+            <div class="list-item">Слухати всі пісні які любить співати Сторона 2.</div>
 
-        <div class="subsection">
-            <strong>2.2. Сторона 2 (Дівчина) зобов'язується:</strong>
-        </div>
+            <div class="subsection">
+                <strong>2.2. Сторона 2 (Дівчина) зобов'язується:</strong>
+            </div>
 
-        <div class="list-item">Офіційно погодитись на статус Дівчини Сторони 1.</div>
-        <div class="list-item">Дивитися на Сторону 1 закоханими очима не менше 5 разів на день.</div>
-        <div class="list-item">Допомагати у побуті Стороні 1.</div>
-        <div class="list-item">Вибирати фільм для перегляду не довше, ніж триває сам фільм.</div>
-        <div class="list-item">Отримувати компліменти без заперечень типу "ой, ні, я сьогодні не виспалась".</div>
+            <div class="list-item">Офіційно погодитись на статус Дівчини Сторони 1.</div>
+            <div class="list-item">Дивитися на Сторону 1 закоханими очима не менше 5 разів на день.</div>
+            <div class="list-item">Допомагати у побуті Стороні 1.</div>
+            <div class="list-item">Вибирати фільм для перегляду не довше, ніж триває сам фільм.</div>
+            <div class="list-item">Отримувати компліменти без заперечень типу "ой, ні, я сьогодні не виспалась".</div>
 
-        <div class="section-title">3. ПОЛІТИКА ЩОДО ЇЖІ ТА РЕСУРСІВ</div>
+            <div class="section-title">3. ПОЛІТИКА ЩОДО ЇЖІ ТА РЕСУРСІВ</div>
 
-        <div class="subsection">
-            3.1. Сторона 2 має беззаперечне право вкрасти шматочок їжі з тарілки Сторони 1, навіть якщо вона казала "я не голодна".
-        </div>
+            <div class="subsection">
+                3.1. Сторона 2 має беззаперечне право вкрасти шматочок їжі з тарілки Сторони 1, навіть якщо вона казала "я не голодна".
+            </div>
 
-        <div class="section-title">4. ВИРІШЕННЯ СПОРІВ</div>
+            <div class="section-title">4. ВИРІШЕННЯ СПОРІВ</div>
 
-        <div class="subsection">
-            4.1. Усі суперечки вирішуються шляхом переговорів, обіймів або замовлення смачненького.
-        </div>
+            <div class="subsection">
+                4.1. Усі суперечки вирішуються шляхом переговорів, обіймів або замовлення смачненького.
+            </div>
 
-        <div class="subsection">
-            4.2. Забороняється лягати спати посвареними (Дозволяється бурчати, але спати треба в обнімку).
-        </div>
+            <div class="subsection">
+                4.2. Забороняється лягати спати посвареними (Дозволяється бурчати, але спати треба в обнімку).
+            </div>
 
-        <div class="section-title">5. ТЕРМІН ДІЇ ДОГОВОРУ</div>
+            <div class="section-title">5. ТЕРМІН ДІЇ ДОГОВОРУ</div>
 
-        <div class="subsection">
-            5.1. Цей Договір набуває чинності з моменту підписання.
-        </div>
+            <div class="subsection">
+                5.1. Цей Договір набуває чинності з моменту підписання.
+            </div>
 
-        <div class="subsection">
-            5.2. Термін дії: Безстроково.
-        </div>
+            <div class="subsection">
+                5.2. Термін дії: Безстроково.
+            </div>
 
-        <div class="section-title">6. ФОРС-МАЖОРНІ ОБСТАВИНИ</div>
+            <div class="section-title">6. ФОРС-МАЖОРНІ ОБСТАВИНИ</div>
 
-        <div class="subsection">
-            6.1. Сторони звільняються від відповідальності за поганий настрій, якщо вони:
-        </div>
+            <div class="subsection">
+                6.1. Сторони звільняються від відповідальності за поганий настрій, якщо вони:
+            </div>
 
-        <div class="list-item">Голодні.</div>
-        <div class="list-item">Не виспались.</div>
-        <div class="list-item">Програли у відеогрі (стосується Сторони 1).</div>
-        <div class="list-item">Зламали ніготь (стосується Сторони 2).</div>
+            <div class="list-item">Голодні.</div>
+            <div class="list-item">Не виспались.</div>
+            <div class="list-item">Програли у відеогрі (стосується Сторони 1).</div>
+            <div class="list-item">Зламали ніготь (стосується Сторони 2).</div>
 
             <div class="signatures">
                 <div class="section-title">ПІДПИСИ СТОРІН</div>
