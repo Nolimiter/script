@@ -100,8 +100,9 @@
                 }
 
                 /* Відступи між кнопками */
-                #crm-greeting-button-custom-icon {
-                    margin-right: 8px;
+                #crm-greeting-button-custom-icon,
+                #crm-templates-button-custom-icon {
+                    margin: 0 4px;
                 }
 
                 /* Hover effects for custom icons */
