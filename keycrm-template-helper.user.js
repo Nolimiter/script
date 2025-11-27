@@ -99,6 +99,11 @@
                     background: #575962;
                 }
 
+                /* Відступи між кнопками */
+                #crm-greeting-button-custom-icon {
+                    margin-right: 8px;
+                }
+
                 /* Hover effects for custom icons */
                 .textarea-icon:hover .key-icon--greeting {
                     background: #4daafc;
