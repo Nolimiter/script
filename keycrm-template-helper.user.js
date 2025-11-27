@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         KeyCRM Template Helper
 // @namespace    http://tampermonkey.net/
-// @version      22.0
+// @version      22.1
 // @description  Додає панель з кнопками для вставки привітань та керування шаблонами. Підтримує транслітерацію імен з латиниці на кирилицю. Оптимізована версія з покращеною структурою коду.
 // @author       KeyCRM Helper Team
 // @match        *://*.keycrm.app/*
@@ -21,14 +21,14 @@
  * - Drag-and-drop template reordering
  * - Custom transliteration dictionary management
  *
- * @version 22.0
+ * @version 22.1
  * @license MIT
  */
 
 (function() {
     'use strict';
 
-    console.log(`KeyCRM Template Helper v22.0: Скрипт запускається...`);
+    console.log(`KeyCRM Template Helper v22.1: Скрипт запускається...`);
 
     // ============================================================================
     // SETTINGS MODULE
@@ -1506,6 +1506,9 @@
          * Ensures buttons exist in the page
          */
         ensureButtons() {
+            // Видаляємо всі старі кнопки перед додаванням нових
+            document.querySelectorAll('#crm-greeting-button-custom-icon, #crm-templates-button-custom-icon').forEach(btn => btn.remove());
+
             // Шукаємо контейнер з іконками напряму
             const iconContainers = document.querySelectorAll('.vac-icon-textarea');
 
@@ -1524,15 +1527,12 @@
                 console.log('KeyCRM Template Helper: .vac-icon-textarea знайдено!');
             }
 
-            iconContainers.forEach(container => {
-                // Перевіряємо, чи вже є наші кнопки
-                if (!container.querySelector('#crm-greeting-button-custom-icon')) {
-                    this.createGreetingButton(container);
-                }
-                if (!container.querySelector('#crm-templates-button-custom-icon')) {
-                    this.createTemplatesButton(container);
-                }
-            });
+            // Додаємо кнопки тільки в останній контейнер (активний чат)
+            const lastContainer = iconContainers[iconContainers.length - 1];
+            if (lastContainer) {
+                this.createGreetingButton(lastContainer);
+                this.createTemplatesButton(lastContainer);
+            }
         }
     };
 
