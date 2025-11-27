@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         KeyCRM Template Helper
 // @namespace    http://tampermonkey.net/
-// @version      22.5
+// @version      22.6
 // @description  Додає 2 кастомні кнопки для вставки привітань та керування шаблонами. Підтримує транслітерацію імен з латиниці на кирилицю.
 // @author       KeyCRM Helper Team
 // @match        *://*.keycrm.app/*
@@ -21,14 +21,14 @@
  * - Drag-and-drop template reordering
  * - Custom transliteration dictionary management
  *
- * @version 22.5
+ * @version 22.6
  * @license MIT
  */
 
 (function() {
     'use strict';
 
-    console.log(`KeyCRM Template Helper v22.5: Скрипт запускається...`);
+    console.log(`KeyCRM Template Helper v22.6: Скрипт запускається...`);
 
     // ============================================================================
     // SETTINGS MODULE
@@ -1397,9 +1397,10 @@
             const rawFullName = nameElement.textContent.trim().split(/[\/\\]/)[0].trim();
             const words = rawFullName.split(/\s+/); // Розбити на слова
 
-            // Спробувати знайти транслітерацію для кожного слова (спочатку перевіряємо всі слова)
+            // Спробувати знайти транслітерацію для кожного слова в словнику
             let foundName = null;
             let transliterated = null;
+            let foundInDictionary = false;
 
             for (const word of words) {
                 const preparedWord = UtilsModule.capitalizeFirstLetter(word);
@@ -1407,34 +1408,34 @@
                 if (trans) {
                     foundName = preparedWord;
                     transliterated = trans;
+                    foundInDictionary = true;
                     break;
                 }
             }
 
-            // Якщо не знайдено транслітерацію, шукаємо кирилічне слово (беремо останнє, бо часто це ім'я)
-            if (!transliterated) {
-                for (let i = words.length - 1; i >= 0; i--) {
-                    const word = words[i];
-                    if (/[а-яА-ЯіІїЇєЄґҐ]/.test(word)) {
-                        foundName = word;
-                        transliterated = word;
-                        break;
-                    }
-                }
-            }
-
-            // Якщо нічого не знайдено - показати модалку
-            if (!foundName || !transliterated) {
-                console.log(`KeyCRM Template Helper: Unknown name in "${rawFullName}".`);
-                UIModule.showNameChoice(words[words.length - 1] || ''); // Показати останнє слово як варіант
+            // Якщо знайдено в словнику - одразу вставляємо
+            if (foundInDictionary && transliterated) {
+                const finalName = transliterated;
+                const message = SettingsModule.messageTemplate
+                    .replace('_', UtilsModule.capitalizeFirstLetter(finalName))
+                    .replace('_', SettingsModule.myName);
+                UIModule.insertText(message);
                 return;
             }
 
-            const finalName = transliterated;
-            const message = SettingsModule.messageTemplate
-                .replace('_', UtilsModule.capitalizeFirstLetter(finalName))
-                .replace('_', SettingsModule.myName);
-            UIModule.insertText(message);
+            // Якщо НЕ знайдено в словнику - шукаємо кирилічне слово для підказки
+            let suggestedName = '';
+            for (let i = words.length - 1; i >= 0; i--) {
+                const word = words[i];
+                if (/[а-яА-ЯіІїЇєЄґҐ]/.test(word)) {
+                    suggestedName = word;
+                    break;
+                }
+            }
+
+            // Якщо не знайдено в словнику - показати модалку (навіть якщо є кирилиця)
+            console.log(`KeyCRM Template Helper: Name "${rawFullName}" not found in dictionary, showing modal.`);
+            UIModule.showNameChoice(suggestedName || words[words.length - 1] || '');
         }
     };
 
