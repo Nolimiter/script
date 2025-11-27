@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         KeyCRM Template Helper
 // @namespace    http://tampermonkey.net/
-// @version      22.2
-// @description  Додає панель з кнопками для вставки привітань та керування шаблонами. Підтримує транслітерацію імен з латиниці на кирилицю. Залишає тільки 2 кастомні іконки.
+// @version      22.3
+// @description  Додає 2 кастомні кнопки для вставки привітань та керування шаблонами. Підтримує транслітерацію імен з латиниці на кирилицю.
 // @author       KeyCRM Helper Team
 // @match        *://*.keycrm.app/*
 // @grant        GM_addStyle
@@ -21,14 +21,14 @@
  * - Drag-and-drop template reordering
  * - Custom transliteration dictionary management
  *
- * @version 22.2
+ * @version 22.3
  * @license MIT
  */
 
 (function() {
     'use strict';
 
-    console.log(`KeyCRM Template Helper v22.2: Скрипт запускається...`);
+    console.log(`KeyCRM Template Helper v22.3: Скрипт запускається...`);
 
     // ============================================================================
     // SETTINGS MODULE
@@ -416,12 +416,6 @@
                 .crm-notification-info {
                     background-color: #3e3e3f;
                     color: #4daafc;
-                }
-
-                /* Hide all native KeyCRM icons, keep only our custom buttons */
-                .vac-icon-textarea .textarea-icon:not(#crm-greeting-button-custom-icon):not(#crm-templates-button-custom-icon),
-                .vac-icon-textarea .vac-emoji-wrapper {
-                    display: none !important;
                 }
             `);
         }
